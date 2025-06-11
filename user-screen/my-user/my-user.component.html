@@ -1,0 +1,19 @@
+<app-nav-bar></app-nav-bar>
+<div class="content-container">
+  <div *ngIf="users.length==0" class="no-users">
+    <h4>There are no users</h4>
+    <img src="assets/doc-portal/no-users.png" height="90.39px" width="367px">
+    <div id="para">To add a new user. Click add user in the above tab.</div>
+  </div> 
+  <div class="user-list" *ngIf="showUsers">
+    <div *ngFor="let user of users" class="user-card" (click)="viewUserDetails(user)">
+      <div class="user-badge">
+        <div class="user-left">
+          <div class="circle">{{ user.nickname | initials }}</div>
+          <div class="username">{{ user.nickname }}</div>
+        </div>
+        <div class="time">{{ user.last_accessed_time | dateFormat }}</div>
+      </div>
+    </div>
+  </div>
+</div>

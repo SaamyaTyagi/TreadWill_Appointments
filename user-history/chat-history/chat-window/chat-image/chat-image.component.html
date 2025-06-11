@@ -1,0 +1,109 @@
+<img
+  appLazyLoad
+  class="msg-img img-responsive"
+  height="auto"
+  (load)="changeLoading()"
+  src="{{ image.url }}"
+  [ngClass]="{'chatbot-games' : fromChatbotGames || botSticker }"
+  [ngStyle]="{
+    minHeight: fromChatbotGames ? '200px' : 'auto',
+    height: fromChatbotGames ? '200px' : 'auto',
+    width: fromChatbotGames ? 'auto' : '265px',
+    maxWidth: fromChatbotGames ? '260px' : width,
+    minWidth: fromChatbotGames ? '260px' : '100%',
+    marginTop: fromConversation ? '0' : '10px'
+  }"
+  (click)="changeUrl()"
+  alt="image"
+/>
+<div class="credits" *ngIf="image.credits && !botSticker">
+  <div class="creditDiv">
+    <span>{{ image.credits }}/Unsplash</span>
+<!--    <a-->
+<!--      class="link"-->
+<!--      href="https://unsplash.com?utm_source=Treadwill_IITK&utm_medium=referral"-->
+<!--      targest="_blank"-->
+<!--      >Unsplash</a-->
+<!--    >-->
+  </div>
+</div>
+<!--<div class="credits" *ngIf="image.creditsGIF">-->
+<!--  <div-->
+<!--    class="gifMark"-->
+<!--    (click)="changeUrl()"-->
+<!--    *ngIf="image.url === image.static_url"-->
+<!--  >-->
+<!--    GIF-->
+<!--  </div>-->
+<!--  <div class="spinnerDiv" *ngIf="image.showSpinner">-->
+<!--    <mat-progress-spinner-->
+<!--      mode="indeterminate"-->
+<!--      diameter="20"-->
+<!--      color="accent"-->
+<!--    ></mat-progress-spinner>-->
+<!--  </div>-->
+<!--  <div class="creditDiv">-->
+<!--    <img src="assets/chatbot/giphy.svg" alt="giphy" width="80px" />-->
+<!--  </div>-->
+<!--</div>-->
+
+<div
+  class="gifMarkConvo"
+  *ngIf="image.url === image.static_url && fromConversation && dataLoaded"
+  (click)="changeUrl()"
+>
+  GIF
+</div>
+<div class="spinnerConvo" *ngIf="image.showSpinner">
+  <mat-progress-spinner
+    mode="indeterminate"
+    diameter="20"
+    color="accent"
+  ></mat-progress-spinner>
+</div>
+<!--</div>-->
+
+<div
+  [ngClass]="{
+    skeletonConvo: fromConversation,
+    skeletonChat: !fromConversation
+  }"
+  *ngIf="!dataLoaded"
+>
+  <div class="card">
+    <div
+      [ngStyle]="{ width: !fromConversation ? '280px' : '230px' }"
+      class="card-body text-center"
+    >
+      <div
+        [ngStyle]="{ left: !fromConversation ? '50%' : '30%' }"
+        class="skeleton-text"
+        *ngIf="showGIFIcon; else imageIcon"
+      >
+        GIF
+      </div>
+      <ng-template #imageIcon>
+        <div
+          [ngStyle]="{ left: !fromConversation ? '50%' : '42%' }"
+          class="img-icon"
+        >
+          <svg
+            width="50"
+            height="50"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#D7D7D7"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <path d="M20.4 14.5L16 10 4 20" />
+          </svg>
+        </div>
+      </ng-template>
+      <div *ngIf="!fromConversation" class="creditSkeleton"></div>
+    </div>
+  </div>
+</div>

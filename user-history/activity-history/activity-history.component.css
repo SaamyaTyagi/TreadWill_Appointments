@@ -1,0 +1,101 @@
+/* Sessions Container */
+.sessions-container {
+  font-family: 'Roboto', sans-serif;
+  position: relative;
+  width: 100%;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+
+.timeline {
+  position: absolute;
+  right: 24px;
+  top: 50px; /* Starting from first item */
+  height: 100%;
+  width: 2px;
+  background-color: #e0e0e0;
+  z-index: 1;
+}
+
+/* Session List */
+.session-card {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  background-color: white;
+  position: relative;
+}
+
+/* Session Item */
+.session-item {
+  display: flex;
+  align-items: center;
+  padding: 15px 0;
+  position: relative;
+  margin-right: 40px; /* Make space for timeline markers */
+}
+
+/* Session Image */
+.session-image-container {
+    width: 120px;
+    height: 60px;
+    overflow: hidden;
+    border-radius: 0px;
+    background-color: #f0f0f0;
+    flex-shrink: 0; /* Prevent container from shrinking */
+}
+
+.session-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Try 'contain' instead of 'cover' */
+}
+
+/* Session Details */
+.session-details {
+  flex-grow: 1;
+  margin-left: 15px;
+}
+
+.session-module {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  color: #666666;
+  margin-bottom: 4px;
+}
+
+.session-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+}
+
+/* Timeline Markers - improved alignment */
+.timeline-marker {
+  position: absolute;
+  right: -41px; /* Adjusted to align with timeline */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.marker-completed {
+  background-color: #5cb85c;
+}
+
+.marker-pending {
+  background-color: #d4d4d4;
+}
+
+.checkmark {
+  color: white;
+  font-size: 14px;
+}

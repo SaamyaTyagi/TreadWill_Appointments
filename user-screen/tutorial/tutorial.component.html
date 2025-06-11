@@ -1,0 +1,338 @@
+<app-nav-bar></app-nav-bar>
+
+<!-- The main content - mirror of add-user component structure -->
+<div class="tutorial-content" [class.form-submitted]="formSubmitted">
+
+  <!-- Tutorial tooltip that moves with highlighted elements -->
+  <div class="tutorial-tooltip"
+       *ngIf="highlightedElement"
+       [style.top.px]="tooltipPosition.top"
+       [style.left.px]="tooltipPosition.left"
+       [attr.data-step]="currentStep">
+    <div class="tooltip-content">
+      <div class="tooltip-header" *ngIf="tooltipHeader">{{tooltipHeader}}</div>
+      <p>{{tooltipText}}</p>
+      <div class="tooltip-controls">
+        <button class="tutorial-btn prev-btn" [disabled]="currentStep === 1" (click)="prevStep()">
+          ← Previous
+        </button>
+
+        <!-- Only show End Tutorial button if not on the final step -->
+        <button
+          class="tutorial-btn end-btn"
+          *ngIf="currentStep < totalSteps"
+          (click)="completeTutorial()">
+          End Tutorial
+        </button>
+
+        <!-- Show Next button if not on final step -->
+        <button
+          class="tutorial-btn next-btn"
+          *ngIf="currentStep < totalSteps"
+          (click)="nextStep()">
+          Next →
+        </button>
+
+        <!-- Show Complete button only on final step -->
+        <button
+          class="tutorial-btn complete-btn"
+          *ngIf="currentStep === totalSteps"
+          (click)="completeTutorial()">
+          Complete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create User Form Section -->
+  <div class="create-user-form" *ngIf="!formSubmitted">
+    <img
+      src="assets/doc-portal/air-plane2.png"
+      alt="Airplane"
+      class="airplane-right"
+      *ngIf="user.intervention"
+    />
+    <h1>Create a new user</h1>
+    <form #userForm="ngForm">
+      <!-- Email Input -->
+      <input
+        id="email-input"
+        type="email"
+        placeholder="Enter email id of your user here"
+        name="email"
+        [(ngModel)]="user.email"
+        required
+        [class.highlighted]="highlightedElement === 'email-input'"
+      />
+
+      <!-- Nickname Input -->
+      <input
+        id="nickname-input"
+        type="text"
+        placeholder="Enter a nickname here"
+        name="nickname"
+        [(ngModel)]="user.nickname"
+        required
+        [class.highlighted]="highlightedElement === 'nickname-input'"
+      />
+
+      <!-- Intervention Dropdown -->
+      <select
+        id="intervention-select"
+        [(ngModel)]="user.intervention"
+        name="intervention"
+        required
+        [class.highlighted]="highlightedElement === 'intervention-select'"
+      >
+        <option value="" disabled hidden>Intervention</option>
+        <option *ngFor="let option of interventions" [value]="option">
+          {{ option }}
+        </option>
+      </select>
+    </form>
+  </div>
+
+  <!-- Airplane Animation (left) -->
+  <img
+    src="assets/doc-portal/air-plane1.png"
+    alt="Airplane"
+    class="airplane-left"
+    *ngIf="!user.intervention"
+  />
+
+  <!-- Therapy Suggestions Section -->
+  <section class="therapy-suggestions" *ngIf="user.intervention && !formSubmitted">
+    <div class="therapy-sequence" id="therapy-sequence">
+      <h3 class="section-title">Therapy selected sequence</h3>
+      <div class="card-grid">
+        <ng-container *ngFor="let card of therapySuggestions[user.intervention]">
+          <div class="card-item" *ngIf="card.default_in_series || initialSequence">
+            <div class="card-content">
+              <img class="card-image" [src]="'https://api3.treadwill.org:8004/media/' + card.card_image" [alt]="card.card_name" />
+              <div class="card-title">
+                <span>{{ card.card_name }}</span>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="relaxation-sequence">
+      <h3 class="section-title">Relaxation activities in sequence</h3>
+      <div class="card-grid">
+        <ng-container *ngFor="let card of therapySuggestions['Relaxation Activities']">
+          <div class="card-item" *ngIf="card.default_in_series || initialSequence">
+            <div class="card-content">
+              <img class="card-image" [src]="'https://api3.treadwill.org:8004/media/' + card.card_image" [alt]="card.card_name" />
+              <div class="card-title">
+                <span>{{ card.card_name }}</span>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="assessment-sequence">
+      <h3 class="section-title">Assessments in sequence</h3>
+      <div class="card-grid">
+        <ng-container *ngFor="let card of therapySuggestions['Assessments']">
+          <div class="card-item" *ngIf="card.default_in_series || initialSequence">
+            <div class="card-content">
+              <img class="card-image" [src]="'https://api3.treadwill.org:8004/media/' + card.card_image" [alt]="card.card_name" />
+              <div class="card-title">
+                <span>{{ card.card_name }}</span>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button
+        id="send-email-btn"
+        class="btn btn-primary"
+        [class.highlighted]="highlightedElement === 'send-email-btn'"
+      >
+        Send email
+      </button>
+      <button
+        id="edit-sequence-btn"
+        class="btn btn-secondary"
+        (click)="editseq()"
+        [class.highlighted]="highlightedElement === 'edit-sequence-btn'"
+      >
+        Edit Sequence
+      </button>
+    </div>
+
+    <!-- Edit Sequence Section -->
+    <div class="edit-sequence" *ngIf="editSequence && !drag_drop">
+      <h3 class="section-title">Select/unselect activities <span class="subtitle">(Some have been added by default)</span></h3>
+
+      <div class="therapy-activities" id="therapy-activities">
+        <div class="card-grid">
+          <div class="card-item"
+               id="therapy"
+               *ngFor="let card of therapySuggestions[user.intervention]"
+               [class.selected]="card.default_in_series"
+               (click)="toggleSelection(card)">
+            <div class="card-header">
+              <span class="therapy-name">{{ user.intervention }}</span>
+              <div class="selection-indicator" [class.selected]="card.default_in_series"></div>
+            </div>
+            <img class="card-image" [src]="'https://api3.treadwill.org:8004/media/' + card.card_image" [alt]="card.card_name" />
+            <div class="card-details">
+              <h4 class="card-title">{{ card.card_name }}</h4>
+              <p class="card-description">{{ card.card_description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-title">Relaxation activities <span class="subtitle">(Some have been added by default)</span></h3>
+      <div class="relaxation-activities">
+        <div class="card-grid">
+          <div class="card-item"
+               *ngFor="let card of therapySuggestions['Relaxation Activities']"
+               [class.selected]="card.default_in_series"
+               (click)="toggleSelection(card)"
+               id="relaxation">
+            <div class="card-header">
+              <span class="therapy-name">Relaxation</span>
+              <div class="selection-indicator" [class.selected]="card.default_in_series"></div>
+            </div>
+            <img class="card-image" [src]="'https://api3.treadwill.org:8004/media/' + card.card_image" [alt]="card.card_name" />
+            <div class="card-details">
+              <h4 class="card-title">{{ card.card_name }}</h4>
+              <p class="card-description">{{ card.card_description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-title">Assessments <span class="subtitle">(Some have been added by default)</span></h3>
+      <div class="assessment-activities">
+        <div class="card-grid">
+          <div class="card-item"
+               *ngFor="let card of therapySuggestions['Assessments']"
+               [class.selected]="card.default_in_series"
+               (click)="toggleSelection(card)"
+               id="assessments">
+            <div class="card-header">
+              <span class="therapy-name">Assessment</span>
+              <div class="selection-indicator" [class.selected]="card.default_in_series"></div>
+            </div>
+            <img class="card-image" [src]="'https://api3.treadwill.org:8004/media/' + card.card_image" [alt]="card.card_name" />
+            <div class="card-details">
+              <h4 class="card-title">{{ card.card_name }}</h4>
+              <p class="card-description">{{ card.card_description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn btn-tertiary" (click)="viewFinalSeq()">View Final Sequence</button>
+        <button
+          id="edit-order-btn"
+          class="btn btn-quarternary"
+          (click)="editOrder()"
+          [class.highlighted]="highlightedElement === 'edit-order-btn'"
+        >
+          Edit Order
+        </button>
+      </div>
+    </div>
+
+    <!-- Drag & Drop Section -->
+    <div class="order-sequence" *ngIf="drag_drop && !editSequence">
+      <h3 class="section-title">Drag Drop <span class="subtitle">(Some have been added by default)</span></h3>
+
+      <div class="therapy-activities">
+        <div cdkDropList cdkDropListOrientation="horizontal"
+        (cdkDropListDropped)="drop($event, user.intervention)" class="card-grid">
+          <ng-container *ngFor="let card of therapySuggestions[user.intervention]; let i = index">
+            <div class="card-item"
+                 id="therapy"
+                 *ngIf="card.default_in_series"
+                 [class.selected]="card.default_in_series"
+                 cdkDrag
+                 [class.has-hint]="i === 0">
+              <!-- Add hint message to first card -->
+              <div class="drag-hint" *ngIf="i === 0">Try dragging me!</div>
+
+              <img class="card-image" [src]="'https://api3.treadwill.org:8004/media/' + card.card_image" [alt]="card.card_name" />
+              <div class="card-details">
+                <h4 class="card-title">{{ card.card_name }}</h4>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <h3 class="section-title">Relaxation activities <span class="subtitle">(Some have been added by default)</span></h3>
+      <div class="relaxation-activities">
+        <div cdkDropList
+        cdkDropListOrientation="horizontal"
+        (cdkDropListDropped)="drop($event,'Relaxation Activities')" class="card-grid">
+        <ng-container *ngFor="let card of therapySuggestions['Relaxation Activities']">
+          <div class="card-item"
+               *ngIf="card.default_in_series"
+               [class.selected]="card.default_in_series"
+               id="relaxation"
+               cdkDrag>
+            <img class="card-image" [src]="'https://api3.treadwill.org:8004/media/' + card.card_image" [alt]="card.card_name" />
+            <div class="card-details">
+              <h4 class="card-title">{{ card.card_name }}</h4>
+            </div>
+          </div>
+        </ng-container>
+        </div>
+      </div>
+
+      <h3 class="section-title">Assessments <span class="subtitle">(Some have been added by default)</span></h3>
+      <div class="assessment-activities">
+        <div cdkDropList
+        cdkDropListOrientation="horizontal"
+        (cdkDropListDropped)="drop($event,'Assessments')" class="card-grid">
+        <ng-container *ngFor="let card of therapySuggestions['Assessments']">
+          <div class="card-item"
+               *ngIf="card.default_in_series"
+               [class.selected]="card.default_in_series"
+               id="assessments"
+               cdkDrag>
+            <img class="card-image" [src]="'https://api3.treadwill.org:8004/media/' + card.card_image" [alt]="card.card_name" />
+            <div class="card-details">
+              <h4 class="card-title">{{ card.card_name }}</h4>
+            </div>
+          </div>
+        </ng-container>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button
+          class="btn btn-tertiary"
+          (click)="viewFinalSeq()"
+        >
+          View Final Sequence
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- User Created Success Screen -->
+  <div class="user-created-container" *ngIf="formSubmitted">
+    <div class="message-section">
+      <h2>Your user has been created and invite has been sent</h2>
+      <p class="user-details">username - {{user.email}}</p>
+    </div>
+    <div class="illustration">
+     <img src="assets/doc-portal/sent.png" alt="Email sent illustration" />
+    </div>
+    <button class="view-users-button" (click)="viewUser()">View users</button>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="sessions-container">
+  <!-- Timeline -->
+  <div class="timeline"></div>
+  <div class="timeline-progress" #timelineProgress></div>
+
+  <!-- Session List -->
+  <div class="session-card">
+    <div *ngFor="let session of therapySessions; let i = index" class="session-item">
+      <!-- Session Image -->
+      <div class="session-image-container">
+        <img [src]="session.imagePath" alt="Schema Therapy" class="session-image">
+      </div>
+
+      <!-- Session Details -->
+      <div class="session-details">
+        <div class="session-module">{{ session.module }}</div>
+        <div class="session-title">{{ session.title }}</div>
+      </div>
+
+      <!-- Timeline Marker -->
+      <div class="timeline-marker" [ngClass]="{'marker-completed': session.completed, 'marker-pending': !session.completed}">
+        <span *ngIf="session.completed" class="checkmark">✓</span>
+      </div>
+    </div>
+  </div>
+</div>

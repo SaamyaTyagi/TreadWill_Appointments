@@ -1,0 +1,104 @@
+.login_form {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px; /* Increased from 270px to match Figma */
+  margin: auto;
+  font-family: Arial, Helvetica, sans-serif;
+  /* border: 3px solid #000000; */
+  padding: 40px; /* Increased from 30px to match Figma */
+}
+
+h1 {
+  color: #2a3b3d;
+  text-align: center;
+  margin-bottom: 24px; /* Increased from 1px to match Figma */
+  font-size: 24px; /* Added to match Figma */
+}
+
+input,
+select,
+button {
+  height: 36px; /* Increased from 24px to match Figma */
+  width: 100%;
+  padding: 0 16px; /* Increased from 12px to match Figma */
+  margin: 12px 0; /* Increased from 8px to match Figma */
+  border: 1px solid #cccccc;
+  background-color: #ffffff;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.select {
+  background-color: #ffffff;
+}
+
+select.placeholder {
+  color: #a9a9a9;
+}
+
+select:not(.placeholder) {
+  color: #000000;
+}
+
+select {
+  appearance: none;
+  background-color: #ffffff;
+}
+
+select:focus,
+input:focus {
+  outline: none;
+  border-color: #2A3B3D;
+  box-shadow: 0 0 3px rgba(0, 123, 255, 0.3);
+}
+
+.country-code-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.country-code-wrapper select {
+  height: 36px; /* Increased from 24px to match Figma */
+  width: 80px; /* Increased from 48px to match Figma */
+  margin-right: 12px; /* Increased from 8px to match Figma */
+}
+
+.country-code-wrapper input {
+  height: 36px; /* Increased from 24px to match Figma */
+  width: calc(100% - 92px); /* Adjusted to match Figma */
+}
+
+button {
+  background-color: #dddddd;
+  color: #333333;
+  width: 160px; /* Increased from 120px to match Figma */
+  font-weight: bold;
+  cursor: not-allowed;
+  border: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 8px;
+}
+
+button:enabled {
+  background-color: #2A3B3D;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+button:enabled:hover {
+  background-color: #2A3B3D;
+  color: #ffffff;
+}

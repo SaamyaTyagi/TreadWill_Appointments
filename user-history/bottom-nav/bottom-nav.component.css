@@ -1,0 +1,60 @@
+/* Updated bottom-nav.component.css */
+.bottom-nav-container {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  width: 100%;
+  border-top: 1px solid #e0e0e0;
+  background-color: white;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+  height: 50px; 
+  display: flex;
+  align-items: center; 
+}
+
+.tab-container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 900px;
+}
+
+.tab-item {
+  padding: 10px 5px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-align: center;
+  flex: 1;
+  position: relative;
+  color: #777;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
+  font-size: 12px; 
+}
+
+.tab-item.active {
+  color: #000;
+  font-weight: 600;
+}
+
+.active-indicator {
+  position: absolute;
+  bottom: 5px; 
+  left: 50%;
+  width: 0%;
+  height: 3px;
+  background-color: black;
+  border-radius: 2px;
+  transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+}
+
+.tab-item.active .active-indicator {
+  width: 60%; /* Make it more noticeable */
+  left: 20%;
+}

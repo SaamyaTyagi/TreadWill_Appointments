@@ -1,0 +1,35 @@
+.video {
+  margin-top: 10px;
+}
+.video-icon {
+  width: 100px;
+  height: 70px;
+  margin: 0 auto;
+  background: #d6d6d6;
+  position: relative;
+  border-radius: 15px 15px 15px 15px / 45px 45px 45px 45px;
+}
+.video-icon:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -12px;
+  margin-top: -15px;
+  border-left: 30px solid #fff;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+}
+
+.msg-video {
+  max-height: 400px;
+  max-width: 280px;
+  min-width: 280px;
+  margin-top: 10px;
+  min-height: 300px;
+  box-shadow: 0px 1px 3px #00000029;
+  border-radius: 0px 10px 10px 0px;
+  border-right: solid white 4px;
+  border-bottom: solid white 4px;
+  border-top: solid white 4px;
+}

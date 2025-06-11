@@ -1,0 +1,30 @@
+<div class="message-container" [ngClass]="{'user-message': message.user, 'bot-message': !message.user}">
+  <div class="message-content">
+    <div class="message-text" [innerHTML]="message.message"></div>
+
+    <!-- Attachments/Embed Links -->
+    <div class="attachments" *ngIf="hasAttachments()">
+      <div *ngFor="let embed of message.embed_links" class="attachment">
+        <!-- Image attachment -->
+        <img *ngIf="embed.type === 'image'" [src]="embed.url" [alt]="embed.name || 'Image'" class="attachment-image">
+
+        <!-- Video attachment (simplified) -->
+        <div *ngIf="embed.type === 'video'" class="video-placeholder">
+          <div class="video-info">
+            <span class="video-title">Video</span>
+            <a [href]="embed.url" target="_blank" class="video-link">View Video</a>
+          </div>
+        </div>
+
+        <!-- Credits for images if needed -->
+        <div *ngIf="embed.type === 'image' && embed.credits" class="image-credits">
+          Photo: {{ embed.name }}
+        </div>
+      </div>
+    </div>
+
+    <div class="message-time">
+      {{ getFormattedTime(message.datetime) }}
+    </div>
+  </div>
+</div>

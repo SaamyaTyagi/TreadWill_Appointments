@@ -1,0 +1,482 @@
+
+.mobile-header {
+  position: absolute;
+  width: 100vw; 
+  height: 40px;
+  top: 56px;
+  background: #BC8B37;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+}
+
+
+.back-icon {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 13%;
+  left: 6px;
+  font-size: 18px; 
+  color: white;
+  cursor: pointer; 
+}
+
+
+.username {
+  position: absolute;
+  width: 84px;
+  height: 36px;
+  top: 13px;
+  left: 30px;
+  font-family: Roboto, sans-serif; 
+  font-weight: 500;
+  font-size: 14px;
+  line-height: normal; 
+  letter-spacing: normal; 
+  color: white;
+}
+
+
+.edit-icon {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  right: 30px;
+  top: 20%;
+}
+
+
+.not-signedup{
+  width: 325px;
+  height: 258px;
+  padding-top: 40px;
+  padding-left: 19px;
+}
+#para{
+  width: 235px;
+  height: 95px;
+  padding-top: 40px;
+  padding-left: 63px;
+  font-family: Roboto;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 5%;
+  text-align: center;
+  vertical-align: middle;
+  color: #5E8185;
+}
+.reminder {
+  position: absolute; 
+  width: 156px;
+  height: 32px;
+  top: 470px;
+  left: 100px;
+  border-radius: 4px; 
+  background: #2A3B3D; 
+  color: white; 
+  font-family: Roboto, sans-serif; 
+  font-weight: 500; 
+  font-size: 14px; 
+  line-height: normal; 
+  text-align: center; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+}
+.edit {
+  margin-top: 30px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Section headings (e.g., "Assessments in sequence") */
+.therapy-sequence .section-title,
+.relaxation-sequence .section-title,
+.assessment-sequence .section-title {
+  font-family: Roboto;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 5%;
+  margin-bottom: 8px;
+}
+
+/* Subtitle for headings */
+.therapy-sequence .subtitle,
+.relaxation-sequence .subtitle,
+.assessment-sequence .subtitle {
+  font-size: 10px;
+  color: #555555;
+}
+
+/* Card grid for horizontal scrolling */
+.therapy-sequence .card-grid ,
+.relaxation-sequence .card-grid,
+.assessment-sequence .card-grid {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+/* Individual card item */
+.therapy-sequence .card-item,
+.relaxation-sequence .card-item,
+.assessment-sequence .card-item {
+  flex: 0 0; /* Prevent wrapping */
+  width: 96px; /* Fixed width */
+  height: 68px; /* Fixed height */
+}
+/* Card content styling */
+.therapy-sequence .card-content,
+.relaxation-sequence .card-content,
+.assessment-sequence .card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Card image styling */
+.therapy-sequence .card-image,
+.relaxation-sequence .card-image,
+.assessment-sequence .card-image {
+  padding:0;
+  margin: 0;
+  width: 96px; /* Width as specified */
+  height: 48px; /* Height as specified */
+  object-fit: cover; /* Ensure the image fits properly */
+}
+
+/* Typography for card name below images */
+.therapy-sequence .card-title span,
+.relaxation-sequence .card-title span,
+.assessment-sequence .card-title span {
+  font-family: Inter;
+  font-weight: 400;
+  width: 96px;
+  font-size: 8px;
+  display: inline-block;
+  line-height: 1; /* As per description */
+  letter-spacing: calc(8px * .05); /* Letter-spacing percentage calculation */
+  text-align: center;
+  max-width: 96px; /* Restricts text width to match image width */
+  white-space: nowrap; /* Prevents text from wrapping to the next line */
+  overflow: hidden; /* Hides overflowing text */
+  text-overflow: ellipsis; /* Adds ellipsis for overflow */
+}
+.btn-secondary {
+  margin-left: 80px;
+  margin-top: 20px;
+  width: 136px; /* Width as specified */
+  height: 32px; /* Height as specified */
+  border-radius: 4px; /* Rounded corners */
+  background-color: white; /* Background color as specified */
+  
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 14px; /* Font size as specified */
+  line-height: normal;
+  color:#2A3B3D;
+}
+/* Edit sequence section styling */
+.edit-sequence, .order-sequence {
+  font-family: Roboto;
+  padding: 16px;
+}
+
+/* Section title styling */
+.edit-sequence .section-title,
+.order-sequence .section-title {
+  font-family: Roboto;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: calc(12px * .05);
+  margin-bottom: 16px;
+}
+
+/* Subtitle styling for the text in parentheses */
+.edit-sequence .subtitle,
+.order-sequence .subtitle {
+  font-family: Roboto;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 10px;
+  line-height: 100%;
+  letter-spacing: calc(10px * .05);
+  color: #666666;
+}
+
+/* Card grid specifically for the edit sequence section */
+.edit-sequence .card-grid {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  margin-bottom: 24px;
+  padding-bottom: 8px;
+}
+.order-sequence .card-grid {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 16px;
+  /*flex-wrap: nowrap; /* Prevent wrapping */
+  overflow-x: auto;
+  margin-bottom: 12px;
+}
+
+/* Card item styling in edit sequence */
+.edit-sequence .card-item{
+  width: 208px;
+  height: 232px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+.order-sequence .card-item {
+  width: 104px;
+  height: 100px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+/* Background colors based on activity type */
+.edit-sequence #therapy,
+.order-sequence #therapy {
+  background-color: #7F9DEC;
+}
+
+.edit-sequence #relaxation,
+.order-sequence #relaxation {
+  background-color: #FBF450;
+}
+
+.edit-sequence #assessments,
+.order-sequence #assessments {
+  background-color: #99D2D5;
+}
+
+/* Card header containing therapy name and selection indicator */
+.edit-sequence .card-header
+/* .order-sequence .card-header { */{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+}
+.order-sequence .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px;
+}
+/* Therapy name styling */
+.edit-sequence .therapy-name {
+  font-family: Inter;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 100%;
+  letter-spacing: calc(10px * .05);
+  color: #2D498F;
+  width: 107px;
+}
+
+/* Selection indicator (circle) */
+.edit-sequence .selection-indicator {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #4CAF50;
+  background-color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Selected state of indicator */
+.edit-sequence .selection-indicator.selected {
+  background-color: #4CAF50;
+}
+
+/* Card image styling */
+.edit-sequence .card-image{
+  width: 176px;
+  height: 88px;
+  display: block;
+  margin: 0px auto;
+  padding: 0;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.order-sequence .card-image {
+  width: 90px;
+  height: 44px;
+  display: block;
+  margin: 0px auto;
+  padding: 0;
+  padding-top: 8px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+/* Container for card title and description */
+.edit-sequence .card-details{
+  padding: 0 16px;
+}
+.order-sequence .card-details {
+  padding: 0 12px;
+}
+/* Card title styling */
+.edit-sequence .card-details h4{
+  width: 160px;
+  font-family: Inter;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: calc(14px * .05);
+  color: #000000;
+  margin: 8px 0;
+  white-space: normal;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* Allows max 2 lines */
+  line-clamp: 2; /* Standard property for compatibility */
+  overflow: hidden;
+  max-height: 31px; 
+}
+.order-sequence .card-details h4 {
+  width: 90px;
+  font-family: Inter;
+  font-weight: 350;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: calc(12px * .05);
+  color: #000000;
+  margin: 4px 0;
+  white-space: normal;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* Allows max 2 lines */
+  line-clamp: 2; /* Standard property for compatibility */
+  overflow: hidden;
+  max-height: 31px; 
+}
+/* Card description styling */
+.edit-sequence .card-description{
+  max-width: 176px;
+  display: inline-block;
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 100%;
+  color: #3D3D3D;
+  margin: 0;
+  white-space: normal;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* Allows max 2 lines */
+  line-clamp: 2; /* Standard property for compatibility */
+  overflow: hidden;
+  max-height: 22px; 
+}
+
+/* View Final Sequence button */
+.edit-sequence .btn-tertiary ,
+.order-sequence .btn-tertiary {
+  width: 160px; /* Width as specified */
+  height: 32px; /* Height as specified */
+  border-radius: 4px; /* Rounded corners */
+  background-color: #2A3B3D; /* Background color as specified */
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 14px; /* Font size as specified */
+  line-height: normal;
+  color:#FFFFFF;
+  cursor: pointer;
+}
+.order-sequence .action-buttons{
+  padding-left: 70px;
+}
+.order-sequence .btn-tertiary {
+  width: 160px; /* Width as specified */
+  height: 32px; /* Height as specified */
+  border-radius: 4px; /* Rounded corners */
+  background-color: #2A3B3D; /* Background color as specified */
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 14px; /* Font size as specified */
+  line-height: normal;
+  color:#FFFFFF;
+  cursor: pointer;
+}
+.edit-sequence .btn-quarternary,
+.order-sequence .btn-quarternary {
+  width: 120px; /* Width as specified */
+  height: 32px; /* Height as specified */
+  border-radius: 4px; /* Rounded corners */
+  background-color: white; /* Background color as specified */
+  left: 16px;
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 14px; /* Font size as specified */
+  line-height: normal;
+  color:#2A3B3D;
+}
+/* Selected card highlighting */
+.edit-sequence .card-item.selected {
+  box-shadow: 0 0 0 2px #4CAF50;
+}
+
+/* Action buttons container */
+.action-buttons {
+  padding-left: 21px;
+  display: flex;
+  gap: 16px; /* Space between buttons */
+}
+
+/* Send email button styling */
+.btn-primary {
+  width: 136px; /* Width as specified */
+  height: 32px; /* Height as specified */
+  border-radius: 4px; /* Rounded corners */
+  background-color: #2A3B3D; /* Background color as specified */
+  
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 14px; /* Font size as specified */
+  line-height: normal;
+  color:#FFFFFF;
+}
+.btn-secondary {
+  width: 136px; /* Width as specified */
+  height: 32px; /* Height as specified */
+  border-radius: 4px; /* Rounded corners */
+  background-color: white; /* Background color as specified */
+  
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 14px; /* Font size as specified */
+  line-height: normal;
+  color:#2A3B3D;
+}
+.additional-note .section-title{
+  font-family: Roboto;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: calc(12px * .05);
+}
+.additional-note .btn-primary{
+  margin-left : 80px;
+  margin-top: 20px;
+}

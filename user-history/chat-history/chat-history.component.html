@@ -1,0 +1,42 @@
+<div class="chat-history-container">
+  <!-- Loading state -->
+  <div class="loading-state" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Loading chat history...</p>
+  </div>
+
+  <!-- Chat messages -->
+  <div class="chat-messages" *ngIf="!isLoading">
+    <!-- Date header for "Today" -->
+    <div class="date-separator">
+      <span>Today</span>
+    </div>
+
+    <div *ngFor="let message of messages; let i = index">
+      <!-- Date separator (for any day changes after the first one) -->
+      <div *ngIf="i > 0 && isDifferentDay(i)" class="date-separator">
+        <span>{{ getMessageDate(i) }}</span>
+      </div>
+
+      <!-- Bot message -->
+      <div *ngIf="!message.user" class="bot-message-container">
+        <div class="message-content bot-message">
+          <div class="bot-name">WillBot</div>
+          <div class="message-text" [innerHTML]="message.message"></div>
+        </div>
+      </div>
+
+      <!-- User message -->
+      <div *ngIf="message.user" class="user-message-container">
+        <div class="message-content user-message">
+          <div class="message-text" [innerHTML]="message.message"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty state -->
+  <div class="empty-state" *ngIf="!isLoading && messages.length === 0">
+    <p>No chat history available for this user.</p>
+  </div>
+</div>

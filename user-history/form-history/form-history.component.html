@@ -1,0 +1,12 @@
+<div class="form-grid-container">
+  <div class="form-grid">
+    <div *ngFor="let form of formTypes" class="form-item">
+      <a [routerLink]="form.route">
+        <div class="form-card">
+          <img [src]="form.imagePath" [alt]="form.name">
+          <p class="form-name">{{ form.name }}</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

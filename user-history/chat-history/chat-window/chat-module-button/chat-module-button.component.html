@@ -1,0 +1,49 @@
+<div class="row-fluid">
+  <div class="cover-container" #widgetsContent>
+    <div class="arrow-div">
+    <button mat-icon-button class="left-arrow" (click)="scrollLeft()" *ngIf="dataLoaded && !showSelectedModuleButton">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+     <button mat-icon-button class="right-arrow" (click)="scrollRight()" *ngIf="dataLoaded && !showSelectedModuleButton">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+  </div>
+    <div
+      class="cover-item"
+      *ngFor="let moduleButton of moduleButtonList"
+      [ngStyle]="{ display: !dataLoaded ? 'none' : 'inline-block', float: showSelectedModuleButton ? 'right' : 'none' }"
+    >
+      <div  [ngClass]="getTagBackgroundColor(moduleButton.card_tag)"  *ngIf = "!showSelectedModuleButton">
+        {{moduleButton.card_tag}}
+      </div>
+
+      <mat-card class="module-button-card module-button-box"
+        [style.background-color]="getCardBackgroundColor(moduleButton.therapy_name)"
+      (click)="onModuleCardClicked(moduleButton)">
+        <div class="module-button-card module-button-therapy-name"   >
+          <span *ngIf="moduleButton.therapy_name != 'Independent' ">{{ moduleButton.therapy_name }}</span>
+          <span *ngIf="moduleButton.therapy_number != 0"> {{ moduleButton.therapy_number }} </span></div>
+        <img
+          class="module-button-card module-button-image"
+          src="{{ moduleButton.card_image }}"
+          [alt]="moduleButton.name"
+          [matTooltip]="moduleButton.card_description"
+          matTooltipPosition="above"
+        />
+<!--        <div-->
+<!--          class="module-button-count"-->
+<!--        >-->
+          <div class="module-button-card module-button-name">{{ moduleButton.payload }}</div>
+          <div class=" module-button-card module-button-description">
+          {{ moduleButton.card_description }}
+          </div>
+<!--        </div>-->
+
+      </mat-card>
+    </div>
+
+   <!--  <button mat-icon-button class="right-arrow" (click)="scrollRight()" *ngIf="dataLoaded && !showSelectedModuleButton">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button> -->
+  </div>
+</div>

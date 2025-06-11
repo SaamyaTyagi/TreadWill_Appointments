@@ -1,0 +1,16 @@
+<div class="assessment-container">
+  <div class="assessment-grid">
+    <div class="assessment-card" *ngFor="let assessment of assessmentTypes">
+      <a [routerLink]="[assessment.route]">
+        <div class="card-content">
+          <div class="image-container">
+            <img [src]="assessment.imagePath" [alt]="assessment.name">
+          </div>
+          <div class="title-container">
+            <h3>{{ assessment.name }}</h3>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

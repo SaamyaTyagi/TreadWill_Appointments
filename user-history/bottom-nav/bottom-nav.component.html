@@ -1,0 +1,13 @@
+<!-- bottom-nav.component.html -->
+<div class="bottom-nav-container">
+  <div class="tab-container">
+    <div 
+      *ngFor="let tab of tabs" 
+      class="tab-item" 
+      [class.active]="activeTab === tab.id"
+      (click)="switchTab(tab.id)">
+      {{ tab.label }}
+      <div class="active-indicator" *ngIf="activeTab === tab.id"></div>
+    </div>
+  </div>
+</div>                       

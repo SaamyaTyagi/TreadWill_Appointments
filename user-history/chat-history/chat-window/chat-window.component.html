@@ -1,0 +1,482 @@
+<div
+  class="container chat-window"
+
+  [@openClose]="chatWindowClosed ? 'closed' : openingStyle()"
+  *ngIf="!chatMinimised"
+  xmlns="http://www.w3.org/1999/html">
+  <div class="chat-header d-flex justify-content-center">
+    <img
+      class="chatbot-screen-img"
+      src="assets/chatbot/on_chat_screen.svg"
+      alt=""
+    />
+    <div class="text my-auto mx-3">WillBot</div>
+    <div style= "position: absolute; right: 0;">
+    <button
+      id="minimise_chatbot"
+      mat-icon-button
+      class="minimise-icon"
+      (click)="minimiseChat()"
+      style= "background-color: inherit;"
+    >
+      <mat-icon>keyboard_arrow_down</mat-icon>
+    </button>
+
+      <button  id="close_chatbot"
+               mat-icon-button class="close-icon"
+               [matMenuTriggerFor]="closemenu"
+               #closeMenuTrigger="matMenuTrigger"
+                style= "background-color: inherit;">
+              <mat-icon>close</mat-icon>
+      </button>
+      <mat-menu #closemenu="matMenu">
+        <button mat-menu-item (click)="closeMenu()">Continue this chat activity</button>
+        <button mat-menu-item (click)="switchModule()">Exit this chat activity</button>
+        <button mat-menu-item (click)="close()">Quit chatbot</button>
+
+      </mat-menu>  </div>
+</div>
+  <div
+    class="chat-frame-container"
+    [ngStyle]="{
+      height: mobileView ? 'calc( ' + getFrameHeight() + 'px - 92px)' : '490px'
+    }"
+    #frameContainer
+  >
+    <div
+      class="chat-frame"
+      [ngStyle]="{
+        height: showTextInput
+          ? 'calc(100% - ' + getTextAreaHeight() + 'px)'
+          : '100%'
+      }"
+
+      [scrollTop]="scrollTop"
+      appInfiniteScroll
+      (scroll)="scrollFrame($event)"
+      (atBottom)="atBottom($event)"
+      #messagesDiv
+    >
+      <div class="spinnerDiv" *ngIf="showSpinner">
+        <mat-progress-spinner mode="indeterminate" diameter="15" color="accent">
+        </mat-progress-spinner>
+        <div [ngStyle]="{ fontSize: '12px' }">Loading Messages...</div>
+      </div>
+      <div class="clearfix messages d-flex flex-column" *ngFor="let m of messages; let i = index">
+        <div *ngIf="isDifferentDay(i) || sessionStart(m)" style="text-align: center;">
+          <div class="my-3">
+            <span class="msg-date">{{ getMessageDate(i)}} </span>
+          </div>
+        </div>
+        <div>
+          <!--      code for chatbot games-->
+          <app-chatbot-games *ngIf="m.start_cognitive_strategy_game"
+                             [games]="m.resources"
+                             (showNextEmitted) = showNextGame()
+                             (gameMessage)="getGameMessage($event)"
+          ></app-chatbot-games>
+
+          <!--      till here-->
+
+
+          <!--      code for image-slider-->
+
+            <app-image-slider *ngIf="m.show_image_slider"
+                              [imagesList]="m.resources"
+                              (imageSliderNext)="showNextMessage($event)"
+            ></app-image-slider>
+
+          <!--      till here-->
+
+          <ng-container *ngIf="!m.waiting">
+            <div class="message" [ngClass]="{ bot: !m.user }" *ngIf="m.message" >
+              <div class="message-text" [ngStyle]="{marginBottom: m.show_checkbox || m.textbox_with_btn_or_widget? '20px' : ''}"
+                   [innerHTML]="m.message"></div>
+              <!-- <span class="date-time">{{m.datetime | date: 'short' }}</span> -->
+            </div>
+
+          </ng-container>
+
+          <!--      code for imagery-->
+          <app-audio-message *ngIf="(m.show_audio_message && show_audio_message) || (m.safety_bubble_message && safety_bubble_message)"
+                             [safety_bubble]="safety_bubble_message"
+                             [imagery]="show_safe_place_imagery"
+                             [evoking_happy_child_imagery]="show_happy_child_imagery"
+                             [visualizing_future_of_ham]="show_visualize_future_imagery"
+                             (completed)="showNextMessage($event)"
+          ></app-audio-message>
+
+          <!--  till here        -->
+
+        </div>
+
+<!--        code for showing selected module button card-->
+        <app-chat-module-button [moduleButtonList]="m.resources"
+                                [dataLoaded] = "m.show_selected_module_button"
+                                [showSelectedModuleButton] = "m.show_selected_module_button"
+                                *ngIf="m.show_selected_module_button"></app-chat-module-button>
+
+        <!--      code for forms checkboxes-->
+        <ng-container *ngIf="m.show_checkbox && showCheckboxElement">
+        <div class="check-box-element">
+        <app-custom-chat-checkboxes [messagesList]="m.resources"
+                                    (gameMessage)="getFormMessage($event)"
+        ></app-custom-chat-checkboxes>
+        </div>
+        </ng-container>
+        <!--      till here-->
+
+
+
+
+        <div
+          *ngFor="let embed_link of m.embed_links; let i = index"
+          [ngStyle]="{ width: 'fit-content' }"
+        >
+          <ng-container *ngIf="embed_link.type === 'video'; else image">
+            <app-chat-video [videoUrl]="embed_link.url"></app-chat-video>
+          </ng-container>
+          <ng-template #image>
+            <app-chat-image
+              class="chatbot"
+              [image]="embed_link"
+              [botSticker] = "true"
+            ></app-chat-image>
+          </ng-template>
+        </div>
+
+
+
+        <div *ngFor="let widget of m.widgets">
+          <div
+            class="text-center"
+            *ngIf="widget === moodWidget || widget === dateTimeWidget"
+          >
+            <button
+              (click)="onMoodSelect()"
+              *ngIf="widget === moodWidget && showMoodWidgetBtn"
+              class="mood-btn btn px-0 py-0 btn-outline-light mt-2 mb-4"
+            >
+              <img
+                [ngStyle]="{ width: '184px', height: '50px' }"
+                src="assets/chatbot/mood_tracker.svg"
+                alt="mood tracker image"
+              />
+            </button>
+            <div *ngIf="showMoodTracker">
+              <app-mood-tracker
+                class="chatbot"
+                [moduleName]="currentModule"
+                (onClose)="onMoodSelect()"
+                (moodSubmit)="onChatSubmit()"
+                (moodMessage)="getMoodMessage($event)"
+              ></app-mood-tracker>
+            </div>
+            <button
+              class="btn px-0 py-0 btn-outline-light date-time-btn mt-2 mb-4"
+              (click)="onDateTimeSelect()"
+              *ngIf="widget === dateTimeWidget && showDateTimeWidgetBtn"
+            >
+              <img
+                [ngStyle]="{ width: '184px', height: '50px' }"
+                src="assets/chatbot/date-time.svg"
+                alt="date time widget image"
+              />
+            </button>
+            <div *ngIf="showDateTime">
+              <app-date-time-picker
+                class="chatbot"
+                (onClose)="onDateTimeSelect()"
+                (dateTimeSubmit)="onChatSubmit()"
+                (dateTimeMessage)="getDateTimeMessage($event)"
+              ></app-date-time-picker>
+            </div>
+          </div>
+          <div
+            class="clearfix chatbot-error-card rating"
+            *ngIf="widget === ratingWidget && showSlider"
+          >
+            <app-form-slider
+              class="chatbot"
+              [minRatingText]="'Not at all'"
+              [maxRatingText]="'Very strongly'"
+              (getRating)="getRating($event)"
+            ></app-form-slider>
+            <button
+              mat-raised-button
+              class="btn done-btn"
+              (click)="onRatingSubmit()"
+            >
+              Done
+            </button>
+          </div>
+        </div>
+<!--        <div class="buttons" >-->
+          <div >
+            <app-simple-mood-tracker
+              class="chatbot"
+              *ngIf="m.show_simple_mood_tracker && showSimpleMoodTracker"
+              (moodSubmit)="onChatSubmit()"
+              (exitMoodTracker) ="simpleMoodTrackerValues($event)"
+              [positiveMood]="show_only_positive_mood"
+            ></app-simple-mood-tracker>
+<!--          </div>-->
+        </div>
+
+        <!--      TEXT BOX WITH WIDGET OR BUTTON, TEXTBOX APPEARS BEFORE BUTTON and after widget - START-->
+        <form (ngSubmit)="onChatSubmit()"  >
+          <div *ngIf="m.textbox_with_btn_or_widget && textbox_with_btn_or_widget" class="form-div" >
+
+
+            <div class="textarea pt-2 pb-2 pl-2">
+              <!--                <mat-form-field class="full-width">-->
+              <textarea
+                matInput
+                rows="3"
+                placeholder="Enter your message"
+                [(ngModel)]="message"
+                name="message"
+                (keyup)="sendReply($event)"
+                #ti
+                autocomplete="off"
+                style="caret-color: grey;padding: 4px 4px 0px 4px;"
+                autofocus
+                (focus)="onFocusEvent($event)"
+              >
+          </textarea>
+            </div>
+            <div class="btn-div">
+              <button type="submit">
+                <mat-icon [ngStyle]="{ color: 'grey' }">send</mat-icon>
+              </button>
+            </div>
+          </div>
+        </form>
+
+
+        <!--      TEXT BOX WITH WIDGET OR BUTTON, TEXTBOX APPEARS BEFORE ANY OF THEM - ENDS HERE-->
+
+      </div>
+
+
+      <app-chat-module-button [moduleButtonList]="chatButtons"
+                              (moduleCardClicked) = "chatModuleCardClicked($event)"
+                              [dataLoaded] = "showModuleButtons"
+                              *ngIf="(buttonType === clickAble) || showModuleButtons"></app-chat-module-button>
+
+
+      <div
+        class="buttons clearfix"
+        *ngIf="showNextButton && buttonType !== clickAble "
+        [ngClass]="{
+          display_cell: buttonType === clickAble,
+          display_block: buttonType !== clickAble
+        }">
+<!--        need to check below condition-->
+<!--        *ngIf="chatButtons && chatButtons.length > 0"-->
+<!--      >-->
+        <button
+          mat-stroked-button
+          color="primary"
+          *ngFor="let button of chatButtons; let ind = index"
+          [ngClass]="{
+            'btn radio_button ripple': button.type === radio || hyperlink,
+            'btn module_button': button.type === clickAble
+          }"
+          (click)="chatButtonPressed(button)"
+        >
+          <span
+            class="module-skeleton"
+            [ngStyle]="{
+              display:
+                button.type === clickAble && !button.loaded ? 'block' : 'none'
+            }"
+          >
+          </span>
+          <img
+            [src]="button.image_url"
+            [alt]="button.emojified_payload"
+            class="module-img"
+            width="150px"
+            height="80px"
+            [ngStyle]="{
+              display:
+                button.type === clickAble && button.loaded ? 'block' : 'none'
+            }"
+            (load)="imageLoaded(ind)"
+            *ngIf="button.type === clickAble; else btnText"
+          />
+          <ng-template #btnText>
+            <span
+              class="btn-text"
+              [innerHTML]="button.emojified_payload"
+            ></span>
+          </ng-template>
+        </button>
+        <div>
+          <button
+            id="more_button"
+            *ngIf="showMore"
+            class="more-btn btn btn-link"
+            (click)="getButtons()"
+          >
+            more
+          </button>
+        </div>
+      </div>
+
+
+      <div class="clearfix chatbot-error-card" [hidden]="isOnline">
+        <!--        {{ isOnline }}-->
+        <img
+          src="assets/chatbot/Internet_disconnected.svg"
+          width="135px"
+          [ngStyle]="{ marginLeft: '10%' }"
+        />
+        <div
+          [ngStyle]="{
+            marginTop: '30px',
+            marginBottom: '20px'
+          }"
+        >
+          Internet disconnected
+        </div>
+      </div>
+      <div class="clearfix chatbot-error-card" *ngIf="showMaintenance">
+        <img
+          src="assets/chatbot/chatbot_maintenance.svg"
+          width="135px"
+          [ngStyle]="{ marginLeft: '10%' }"
+        />
+        <div
+          [ngStyle]="{
+            marginTop: '30px',
+            marginBottom: '20px'
+          }"
+        >
+          I am being maintained!
+        </div>
+      </div>
+      <div *ngIf="isLoading" class="clearfix mt-0">
+        <div class="message bot">
+          <div class="message-text waiting">
+            <div class="dot-typing"></div>
+          </div>
+        </div>
+      </div>
+<!--      <div class="buttons" >-->
+<!--        <div *ngIf="showSimpleMoodTracker">-->
+<!--          <app-simple-mood-tracker-->
+<!--            class="chatbot"-->
+<!--            (moodSubmit)="onChatSubmit()"-->
+<!--            (exitMoodTracker) ="simpleMoodTrackerValues($event)"-->
+<!--          ></app-simple-mood-tracker>-->
+<!--        </div>-->
+<!--      </div>-->
+      <div class="bot-typing" *ngIf="showWillBotTyping">
+        WillBot is typing...
+      </div>
+      <div class="clearfix bottom-div w-100"
+      [ngStyle]="{marginTop : !showTextInput && !textbox_with_btn_or_widget && !showSlider && !showSimpleMoodTracker && show_image_slider ? '90px': '30px' }">
+      </div>
+    </div>
+
+
+    <div
+      [ngStyle]="{ display: showScrollToBottom ? 'block' : 'none' }"
+      class="scroll-bottom"
+      (click)="onScrollToBottomClick()"
+    >
+      <button
+        mat-fab
+        class="double-arrow"
+        [ngStyle]="{ outline: 'none', height: '35px', width: '35px' }"
+        color="black"
+        aria-label="scroll to bottom button with a double arrow icon"
+      >
+        <mat-icon class="arrow-icon">double_arrow</mat-icon>
+      </button>
+    </div>
+    <form (ngSubmit)="onChatSubmit()"  >
+    <div #textArea *ngIf="showTextInput" class="form-div" style="position: fixed; bottom:0px">
+
+
+        <div class="textarea pt-2 pb-2 pl-2">
+          <!--                <mat-form-field class="full-width">-->
+          <textarea
+            matInput
+            rows="3"
+            placeholder="Enter your message"
+            [(ngModel)]="message"
+            name="message"
+            (keyup)="sendReply($event)"
+            #ti
+            autocomplete="off"
+            style="caret-color: grey;padding: 4px 4px 0px 4px;"
+            autofocus
+            (focus)="onFocusEvent($event)"
+          >
+          </textarea>
+        </div>
+        <div class="btn-div">
+          <button type="submit">
+            <mat-icon [ngStyle]="{ color: 'grey' }" >send</mat-icon>
+          </button>
+        </div>
+    </div>
+    </form>
+
+  </div>
+
+
+
+
+  <div id="tooltip-div" #tooltip="matTooltip" matTooltipDisabled
+        matTooltip={{tooltipData}}
+        matTooltipPosition="above" >  </div>
+</div>
+<!--<div-->
+<!--  class="container chat-window"-->
+<!--  style="bottom:0 ; max-width: 70vw; margin-left:15%; height: 30px"-->
+<!--  *ngIf="chatMinimised || chatWindowClosed"-->
+<!--&gt;-->
+  <div
+    class="container chat-window"
+    style="bottom:0 ; max-width: 100vw; margin-left:0%; height: 30px"
+    *ngIf="chatMinimised || chatWindowClosed"
+  >
+  <div class="chat-header d-flex justify-content-center" style="height: 30px">
+    <div>
+    <img
+      class="chatbot-screen-img"
+      style="width:30px;height:auto;margin-top:0px"
+      src="assets/chatbot/on_chat_screen.svg"
+      alt=""
+      *ngIf="!chatWindowClosed"
+    />
+    <img
+      class="chatbot-screen-img"
+      style="width:30px;height:auto;margin-top:0px"
+      src="assets/chatbot/chatbot_home_screen_closed.svg"
+      alt=""
+      *ngIf="chatWindowClosed"
+    />
+  </div>
+    <div class="text mx-2 my-auto">
+    WillBot
+    </div>
+<!--    <div style="position: absolute; right:2%" class="animated-arrow float-right" (click)="maximiseChat()" >-->
+      <div  mat-icon-button style="" class="animated-arrow" (click)="maximiseChat()" >
+        <div class="animated-arrow animated-arrow-container ">
+          <div class="animated-arrow controls">
+
+          </div>
+          <div class="btn-container animated-arrow" >
+            <app-animated-arrows-button direction="up" >
+            </app-animated-arrows-button>
+          </div>
+        </div>
+      </div>
+<!--    </div>-->
+  </div>
+</div>

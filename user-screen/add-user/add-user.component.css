@@ -1,0 +1,560 @@
+*{
+  font : Roboto;
+}
+/* Form Section */
+.create-user-form {
+  font-family: Roboto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  padding-bottom: 0px;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1; /* Add base z-index for the container */
+}
+.create-user-form form,
+.create-user-form input,
+.create-user-form select,
+.create-user-form h1 {
+  position: relative;
+  z-index: 2; /* Higher z-index to appear above the airplane */
+  /* background-color: transparent; Make sure form elements are transparent */
+}
+
+ .create-user-form h1 {
+  color: #2A3B3D;
+  font-family: Roboto;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 5%;
+  text-align: center;
+}
+.create-user-form form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+  
+.create-user-form input,
+.create-user-form select {
+  background-color: #f3f3f3;
+  width: 100%;
+  max-width: 270px;
+  height: 40px;
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  border: 1px solid #D9D9D9;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #000000;
+  box-sizing: border-box;
+}
+
+/* Add placeholder color separately */
+.create-user-form input::placeholder,
+.create-user-form select::placeholder {
+  color: #8C8C8C;
+}
+
+/* Add style for select options to ensure they're black too */
+.create-user-form select option {
+  color: #000000;
+}
+
+.create-user-form select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%238C8C8C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+  color: #8C8C8C; 
+}
+  /* Layout Adjustment for Airplane */
+  .airplane-left {
+    width: 110px;
+    height: 112px;
+    top: 270px;
+    left: 276px;
+  }
+  
+.airplane-right {
+  position: absolute;
+  width: 80px;
+  height: auto;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-10%);
+  z-index: 0; /* Lower z-index to appear behind form elements */
+}
+/* Container for the therapy suggestions section */
+.therapy-suggestions {
+  padding: 16px;
+}
+
+/* Section headings (e.g., "Assessments in sequence") */
+.section-title {
+  font-family: Roboto;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 5%;
+  margin-bottom: 8px;
+}
+
+/* Subtitle for headings */
+.subtitle {
+  font-size: 10px;
+  color: #555555;
+}
+
+/* Card grid for horizontal scrolling */
+.card-grid {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+/* Individual card item */
+.card-item {
+  flex: 0 0 auto; /* Prevent wrapping */
+  width: 96px; /* Fixed width */
+  height: 87px; /* Fixed height */
+}
+
+/* Card content styling */
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Card image styling */
+.card-image {
+  width: 96px; /* Width as specified */
+  height: 48px; /* Height as specified */
+  object-fit: cover; /* Ensure the image fits properly */
+}
+
+/* Typography for card name below images */
+.card-title span {
+  font-family: Inter;
+  font-weight: 400;
+  width: 96px;
+  font-size: 8px;
+  display: inline-block;
+  line-height: 1; /* As per description */
+  letter-spacing: calc(8px * .05); /* Letter-spacing percentage calculation */
+  text-align: center;
+  max-width: 96px; /* Restricts text width to match image width */
+  white-space: nowrap; /* Prevents text from wrapping to the next line */
+  overflow: hidden; /* Hides overflowing text */
+  text-overflow: ellipsis; /* Adds ellipsis for overflow */
+}
+
+/* Edit sequence section styling */
+.edit-sequence, .order-sequence {
+  font-family: Roboto;
+  padding: 16px;
+}
+
+/* Section title styling */
+.edit-sequence .section-title,
+.order-sequence .section-title {
+  font-family: Roboto;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: calc(12px * .05);
+  margin-bottom: 16px;
+}
+
+/* Subtitle styling for the text in parentheses */
+.edit-sequence .subtitle,
+.order-sequence .subtitle {
+  font-family: Roboto;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 10px;
+  line-height: 100%;
+  letter-spacing: calc(10px * .05);
+  color: #666666;
+}
+
+/* Card grid specifically for the edit sequence section */
+.edit-sequence .card-grid {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  margin-bottom: 24px;
+  padding-bottom: 8px;
+}
+.order-sequence .card-grid {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 16px;
+  /*flex-wrap: nowrap; /* Prevent wrapping */
+  overflow-x: auto;
+  margin-bottom: 12px;
+}
+
+/* Card item styling in edit sequence */
+.edit-sequence .card-item{
+  width: 208px;
+  height: 232px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+.order-sequence .card-item {
+  width: 104px;
+  height: 100px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+/* Background colors based on activity type */
+.edit-sequence #therapy,
+.order-sequence #therapy {
+  background-color: #7F9DEC;
+}
+
+.edit-sequence #relaxation,
+.order-sequence #relaxation {
+  background-color: #FBF450;
+}
+
+.edit-sequence #assessments,
+.order-sequence #assessments {
+  background-color: #99D2D5;
+}
+
+/* Card header containing therapy name and selection indicator */
+.edit-sequence .card-header
+/* .order-sequence .card-header { */{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+}
+.order-sequence .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px;
+}
+/* Therapy name styling */
+.edit-sequence .therapy-name {
+  font-family: Inter;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 100%;
+  letter-spacing: calc(10px * .05);
+  color: #2D498F;
+  width: 107px;
+}
+
+/* Selection indicator (circle) */
+.edit-sequence .selection-indicator {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #4CAF50;
+  background-color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Selected state of indicator */
+.edit-sequence .selection-indicator.selected {
+  background-color: #4CAF50;
+}
+
+/* Card image styling */
+.edit-sequence .card-image{
+  width: 176px;
+  height: 88px;
+  display: block;
+  margin: 8px auto;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.order-sequence .card-image {
+  width: 90px;
+  height: 44px;
+  display: block;
+  margin: 8px auto;
+  object-fit: cover;
+  border-radius: 4px;
+}
+/* Container for card title and description */
+.edit-sequence .card-details{
+  padding: 0 16px;
+}
+.order-sequence .card-details {
+  padding: 0 12px;
+}
+/* Card title styling */
+.edit-sequence .card-details h4{
+  width: 160px;
+  font-family: Inter;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: calc(14px * .05);
+  color: #000000;
+  margin: 8px 0;
+  white-space: normal;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* Allows max 2 lines */
+  line-clamp: 2; /* Standard property for compatibility */
+  overflow: hidden;
+  max-height: 31px; 
+}
+.order-sequence .card-details h4 {
+  width: 90px;
+  font-family: Inter;
+  font-weight: 350;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: calc(12px * .05);
+  color: #000000;
+  margin: 4px 0;
+  white-space: normal;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* Allows max 2 lines */
+  line-clamp: 2; /* Standard property for compatibility */
+  overflow: hidden;
+  max-height: 31px; 
+}
+/* Card description styling */
+.edit-sequence .card-description{
+  max-width: 176px;
+  display: inline-block;
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 100%;
+  color: #3D3D3D;
+  margin: 0;
+  white-space: normal;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* Allows max 2 lines */
+  line-clamp: 2; /* Standard property for compatibility */
+  overflow: hidden;
+  max-height: 22px; 
+}
+
+/* View Final Sequence button */
+.edit-sequence .btn-tertiary ,
+.order-sequence .btn-tertiary {
+  width: 160px; /* Width as specified */
+  height: 32px; /* Height as specified */
+  border-radius: 4px; /* Rounded corners */
+  background-color: #2A3B3D; /* Background color as specified */
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 14px; /* Font size as specified */
+  line-height: normal;
+  color:#FFFFFF;
+  cursor: pointer;
+}
+.order-sequence .action-buttons{
+  padding-left: 70px;
+}
+.order-sequence .btn-tertiary {
+  width: 160px; /* Width as specified */
+  height: 32px; /* Height as specified */
+  border-radius: 4px; /* Rounded corners */
+  background-color: #2A3B3D; /* Background color as specified */
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 14px; /* Font size as specified */
+  line-height: normal;
+  color:#FFFFFF;
+  cursor: pointer;
+}
+.edit-sequence .btn-quarternary,
+.order-sequence .btn-quarternary {
+  width: 120px; /* Width as specified */
+  height: 32px; /* Height as specified */
+  border-radius: 4px; /* Rounded corners */
+  background-color: white; /* Background color as specified */
+  left: 16px;
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 14px; /* Font size as specified */
+  line-height: normal;
+  color:#2A3B3D;
+}
+/* Selected card highlighting */
+.edit-sequence .card-item.selected {
+  box-shadow: 0 0 0 2px #4CAF50;
+}
+
+/* Action buttons container */
+.action-buttons {
+  padding-left: 21px;
+  display: flex;
+  gap: 16px; /* Space between buttons */
+}
+
+/* Send email button styling */
+.btn-primary {
+  width: 136px; /* Width as specified */
+  height: 32px; /* Height as specified */
+  border-radius: 4px; /* Rounded corners */
+  background-color: #2A3B3D; /* Background color as specified */
+  
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 14px; /* Font size as specified */
+  line-height: normal;
+  color:#FFFFFF;
+}
+.btn-secondary {
+  width: 136px; /* Width as specified */
+  height: 32px; /* Height as specified */
+  border-radius: 4px; /* Rounded corners */
+  background-color: white; /* Background color as specified */
+  
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 14px; /* Font size as specified */
+  line-height: normal;
+  color:#2A3B3D;
+}
+.user-created-container {
+  text-align: center;
+  max-width: 400px;
+  /* background-color: #ffffff; */
+  /* border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
+  padding: 20px;
+  position: relative;
+}
+
+.message-section h2 {
+  width: 329px;
+  height: 51px;
+  top: 217px;
+  left: 20px;
+  gap: 0px;
+  opacity: 0px;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18.75px;
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.user-details {
+  width: 268px;
+  height: 28px;
+  top: 273px;
+  left: 45px;
+  gap: 0px;
+  opacity: 0px;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 16.41px;
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+    
+}
+.illustration{
+  width: 302px;
+  height: 266.5px;
+  top: 257px;
+  left: 22px;
+  gap: 0px;
+  opacity: 0px;
+  margin-bottom: 5%;
+}
+.view-users-button {
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #2f3e46;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  width: 240px;
+  height: 40px;
+  top: 547px;
+  left: 60px;
+  gap: 0px;
+  border-radius: 3px 0px 0px 0px;
+  opacity: 0px;
+}
+
+.view-users-button:hover {
+  background-color: #1f2a31;
+}
+
+
+/* Media Queries for Responsiveness */
+/* @media (max-width: 1024px) {
+  .create-user-form input,
+  .create-user-form select {
+    width: 40%;
+    margin-left: 30%;
+  }
+} */
+
+@media (max-width: 768px) {
+  .create-user-form h1 {
+    font-size: 20px;
+    margin-bottom: 30px;
+    font-family: Roboto;
+    font-weight: 400;
+    line-height: 23.44px;
+    letter-spacing: 0.05em;
+    text-align: center;
+  }
+
+  .create-user-form input,
+  .create-user-form select {
+    width: 270px;
+    height: 40px;
+    padding: 12px 16px;
+    margin-bottom: 24px;
+    border: 1px solid #D9D9D9;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+}
+
+/* @media (max-width: 480px) {
+  .create-user-form input,
+  .create-user-form select {
+    width: 80%;
+    margin-left: 10%;
+  }
+} */
+

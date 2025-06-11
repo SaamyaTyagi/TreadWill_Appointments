@@ -1,0 +1,27 @@
+<!-- user-history.component.html -->
+<div class="user-history-container">
+  <div class="page-header">
+    <div class="back-button">
+      <a routerLink="main/doc/my-user">
+        <i class="chevron-left-icon">←</i>
+      </a>
+    </div>
+    <div class="header-text">
+      <h1>username - Schema Therapy</h1>
+    </div>
+    <div class="action-button">
+      <i class="edit-icon">✏️</i>
+    </div>
+  </div>
+  
+  <!-- Content area for the router outlet -->
+  <div class="content-area">
+    <router-outlet></router-outlet>
+  </div>
+  
+  <!-- Bottom Navigation Component -->
+  <app-bottom-nav 
+    [activeTab]="activeTab"
+    (tabChange)="navigateToTab($event)">
+  </app-bottom-nav>
+</div>

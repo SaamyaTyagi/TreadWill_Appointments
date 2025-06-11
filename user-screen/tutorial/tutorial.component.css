@@ -1,0 +1,850 @@
+/* Main content area - inherit styles from add-user */
+:root {
+  --triangle-position: 175px; /* Default triangle position, will be updated via TS */
+}
+
+.tutorial-content {
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Import styles from add-user.component.css for consistency */
+/* Form Section */
+.create-user-form {
+  font-family: Roboto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  padding-bottom: 0px;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.create-user-form form,
+.create-user-form input,
+.create-user-form select,
+.create-user-form h1 {
+  position: relative;
+  z-index: 2;
+  background-color: transparent;
+}
+
+.create-user-form h1 {
+  color: #2A3B3D;
+  font-family: Roboto;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 5%;
+  text-align: center;
+}
+
+.create-user-form form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.create-user-form input,
+.create-user-form select {
+  background-color: #f3f3f3;
+  width: 100%;
+  max-width: 270px;
+  height: 40px;
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  border: 1px solid #D9D9D9;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #000000;
+  box-sizing: border-box;
+}
+
+.create-user-form input::placeholder,
+.create-user-form select::placeholder {
+  color: #8C8C8C;
+}
+
+.create-user-form select option {
+  color: #000000;
+}
+
+.create-user-form select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%238C8C8C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+  color: #8C8C8C;
+}
+
+/* Therapy Section */
+.therapy-section {
+  font-family: Roboto;
+  max-width: 800px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.therapy-section h3 {
+  font-family: Roboto;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 5%;
+  color: #010101;
+}
+
+/* Layout Adjustment for Airplane */
+.airplane-left {
+  width: 110px;
+  height: 112px;
+  top: 270px;
+  left: 276px;
+}
+
+.airplane-right {
+  position: absolute;
+  width: 80px;
+  height: auto;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-10%);
+  z-index: 0;
+}
+
+/* Container for the therapy suggestions section */
+.therapy-suggestions {
+  padding: 16px;
+}
+
+/* Section headings */
+.section-title {
+  font-family: Roboto;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 5%;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 10px;
+  color: #555555;
+}
+
+/* Card grid for horizontal scrolling */
+.card-grid {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+/* Individual card item */
+.card-item {
+  flex: 0 0 auto;
+  width: 96px;
+  height: 87px;
+}
+
+/* Card content styling */
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Card image styling */
+.card-image {
+  width: 96px;
+  height: 48px;
+  object-fit: cover;
+}
+
+/* Typography for card name below images */
+.card-title span {
+  font-family: Inter;
+  font-weight: 400;
+  width: 96px;
+  font-size: 8px;
+  display: inline-block;
+  line-height: 1;
+  letter-spacing: calc(8px * .05);
+  text-align: center;
+  max-width: 96px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Edit sequence section styling */
+.edit-sequence, .order-sequence {
+  font-family: Roboto;
+  padding: 16px;
+}
+
+/* Section title styling */
+.edit-sequence .section-title,
+.order-sequence .section-title {
+  font-family: Roboto;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: calc(12px * .05);
+  margin-bottom: 16px;
+}
+
+/* Subtitle styling */
+.edit-sequence .subtitle,
+.order-sequence .subtitle {
+  font-family: Roboto;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 10px;
+  line-height: 100%;
+  letter-spacing: calc(10px * .05);
+  color: #666666;
+}
+
+/* Card grids for edit sequence and order sequence */
+.edit-sequence .card-grid {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  margin-bottom: 24px;
+  padding-bottom: 8px;
+}
+
+.order-sequence .card-grid {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 16px;
+  overflow-x: auto;
+  margin-bottom: 12px;
+}
+
+/* Card items for edit sequence and order sequence */
+.edit-sequence .card-item {
+  width: 208px;
+  height: 232px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.order-sequence .card-item {
+  width: 104px;
+  height: 100px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background colors based on activity type */
+.edit-sequence #therapy,
+.order-sequence #therapy {
+  background-color: #7F9DEC;
+}
+
+.edit-sequence #relaxation,
+.order-sequence #relaxation {
+  background-color: #FBF450;
+}
+
+.edit-sequence #assessments,
+.order-sequence #assessments {
+  background-color: #99D2D5;
+}
+
+/* Card header containing therapy name and selection indicator */
+.edit-sequence .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+}
+
+.order-sequence .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px;
+}
+
+/* Therapy name styling */
+.edit-sequence .therapy-name {
+  font-family: Inter;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 100%;
+  letter-spacing: calc(10px * .05);
+  color: #2D498F;
+  width: 107px;
+}
+
+/* Selection indicator (circle) */
+.edit-sequence .selection-indicator {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #4CAF50;
+  background-color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Selected state of indicator */
+.edit-sequence .selection-indicator.selected {
+  background-color: #4CAF50;
+}
+
+/* Card image styling */
+.edit-sequence .card-image {
+  width: 176px;
+  height: 88px;
+  display: block;
+  margin: 8px auto;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.order-sequence .card-image {
+  width: 90px;
+  height: 44px;
+  display: block;
+  margin: 8px auto;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Container for card title and description */
+.edit-sequence .card-details {
+  padding: 0 16px;
+}
+
+.order-sequence .card-details {
+  padding: 0 12px;
+}
+
+/* Card title styling */
+.edit-sequence .card-details h4 {
+  width: 160px;
+  font-family: Inter;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: calc(14px * .05);
+  color: #000000;
+  margin: 8px 0;
+  white-space: normal;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  max-height: 31px;
+}
+
+.order-sequence .card-details h4 {
+  width: 90px;
+  font-family: Inter;
+  font-weight: 350;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: calc(12px * .05);
+  color: #000000;
+  margin: 4px 0;
+  white-space: normal;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  max-height: 31px;
+}
+
+/* Card description styling */
+.edit-sequence .card-description {
+  max-width: 176px;
+  display: inline-block;
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 100%;
+  color: #3D3D3D;
+  margin: 0;
+  white-space: normal;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  max-height: 22px;
+}
+
+/* Button styling */
+.btn-tertiary,
+.btn-quarternary {
+  width: 140px;
+  height: 32px;
+  border-radius: 4px;
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: normal;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-tertiary {
+  background-color: #2A3B3D;
+  color: #FFFFFF;
+}
+
+.btn-quarternary {
+  background-color: white;
+  color: #2A3B3D;
+  border: 1px solid #D9D9D9;
+}
+
+/* Selected card highlighting */
+.edit-sequence .card-item.selected {
+  box-shadow: 0 0 0 2px #4CAF50;
+}
+
+/* Action buttons container */
+.action-buttons {
+  padding-left: 21px;
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+/* Send email button styling */
+.btn-primary {
+  width: 136px;
+  height: 32px;
+  border-radius: 4px;
+  background-color: #2A3B3D;
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: normal;
+  color: #FFFFFF;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  width: 136px;
+  height: 32px;
+  border-radius: 4px;
+  background-color: white;
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: normal;
+  color: #2A3B3D;
+  border: 1px solid #D9D9D9;
+  cursor: pointer;
+}
+
+/* User created success screen */
+.user-created-container {
+  text-align: center;
+  max-width: 400px;
+  padding: 20px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.message-section h2 {
+  width: 329px;
+  height: 51px;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18.75px;
+  letter-spacing: 0.05em;
+  text-align: center;
+  margin: 0 auto 15px;
+}
+
+.user-details {
+  width: 268px;
+  height: 28px;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 16.41px;
+  letter-spacing: 0.05em;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.illustration {
+  width: 302px;
+  height: 266.5px;
+  margin: 20px auto;
+}
+
+.illustration img {
+  max-width: 100%;
+  height: auto;
+}
+
+.view-users-button {
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #2f3e46;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  width: 240px;
+  height: 40px;
+  margin: 20px auto;
+  display: block;
+}
+
+.view-users-button:hover {
+  background-color: #1f2a31;
+}
+
+/* Tutorial-specific styles */
+.highlighted {
+  border: 2px solid #BC8B37 !important;
+  box-shadow: 0 0 10px rgba(188, 139, 55, 0.5) !important;
+  position: relative;
+  z-index: 10;
+}
+
+/* Redesigned tooltip with dynamic sizing and better positioning */
+.tutorial-tooltip {
+  position: absolute;
+  width: max-content;
+  min-width: 250px;
+  max-width: 320px;
+  background-color: #2A3B3D;
+  border-radius: 8px;
+  color: white;
+  padding: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  pointer-events: auto;
+}
+
+/* Add a triangle indicator that can be positioned dynamically */
+.tutorial-tooltip::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #2A3B3D;
+  top: -10px;
+  left: var(--triangle-position);
+  transform: translateX(-50%);
+}
+
+.tooltip-content {
+  padding: 16px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: white;
+}
+
+.tooltip-content p {
+  margin: 0 0 16px 0;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.tooltip-header {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #BC8B37;
+}
+
+/* Updated tooltip controls with reduced gaps */
+/* Adjusted tooltip controls with better spacing */
+.tooltip-controls {
+  display: flex;
+  flex-direction: row !important;
+  justify-content: center; /* Center the buttons */
+  align-items: center;
+  margin-top: 12px;
+  gap: 6px; /* Moderate gap between buttons */
+  width: 100%;
+  padding: 0 4px; /* Add small padding on the sides */
+}
+
+/* Style buttons to be more compact and consistent in size */
+.tutorial-btn {
+  padding: 4px 8px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 11px;
+  background-color: #FFFFFF;
+  color: #2A3B3D;
+  transition: background-color 0.2s;
+  flex: 0 1 auto; /* Don't grow, allow shrinking, auto basis */
+  min-width: 50px;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* Style for the End Tutorial button - make width similar to other buttons */
+.end-btn {
+  background-color: #f0f0f0;
+  border: 1px solid #dddddd;
+  font-size: 10px;
+  max-width: 85px; /* Limit width to be closer to other buttons */
+  width: auto;
+}
+
+.end-btn:hover {
+  background-color: #e0e0e0;
+}
+
+/* Style for the prev/next buttons */
+.prev-btn, .next-btn {
+  min-width: 45px;
+  max-width: 70px;
+  width: auto;
+}
+
+.complete-btn {
+  min-width: 65px;
+  max-width: 80px;
+}
+
+.tutorial-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.prev-btn:hover:not(:disabled),
+.next-btn:hover:not(:disabled),
+.complete-btn:hover:not(:disabled) {
+  background-color: #F5F5F5;
+}
+
+/* Special mobile adjustments */
+@media (max-width: 480px) {
+  .tooltip-controls {
+    padding: 0 2px;
+    gap: 4px; /* Slightly less gap on mobile but still visible */
+  }
+
+  .tutorial-btn {
+    min-width: auto;
+    padding: 5px 6px;
+    font-size: 10px;
+  }
+
+  .end-btn {
+    font-size: 9px;
+    max-width: 70px; /* Slightly smaller on mobile */
+  }
+}
+
+/* CSS animations */
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(188, 139, 55, 0.5); }
+  70% { box-shadow: 0 0 0 10px rgba(188, 139, 55, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(188, 139, 55, 0); }
+}
+
+.highlighted {
+  animation: pulse 2s infinite;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+  .tutorial-tooltip {
+    width: 90%;
+    max-width: 350px;
+  }
+
+  .create-user-form input,
+  .create-user-form select {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .action-buttons {
+    padding-left: 0;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .tooltip-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .tutorial-btn {
+    width: 100%;
+  }
+
+  .card-grid {
+    gap: 5px;
+  }
+
+  .message-section h2,
+  .user-details {
+    width: 100%;
+  }
+
+  .illustration {
+    width: 100%;
+  }
+
+  .view-users-button {
+    width: 100%;
+  }
+}
+/* Additional CSS for the new tutorial dialog positions */
+
+/* Base tooltip positioning method that dynamically positions tooltips */
+.tutorial-tooltip[data-step="4"] {
+  /* For "A default sequence of activities..." dialog */
+  top: calc(50% + 100px) !important; /* Position in the middle of the cards */
+  left: 50% !important;
+  transform: translate(-50%, -50%);
+  max-width: 350px !important;
+  width: 85% !important;
+  z-index: 2000;
+}
+
+.tutorial-tooltip[data-step="4"]::before {
+  /* Adjust triangle for step 4 */
+  left: 50%;
+  top: -10px;
+  transform: translateX(-50%);
+}
+
+/* Fine-tuned CSS to fix the triangle pointer */
+
+/* Keep the tooltip positioning */
+.tutorial-tooltip[data-step="6"] {
+  /* Position for "Select/unselect any activity..." dialog */
+  top: 490px !important; /* Position below the green circle */
+  left: 400px !important; /* Center horizontally */
+  transform: translate(-50%, 0) !important; /* Center horizontally only */
+  max-width: 350px !important;
+  width: 300px !important;
+  z-index: 2000;
+}
+
+/* Fixed triangle positioning */
+.tutorial-tooltip[data-step="6"]::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  /* Create triangle with borders */
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 12px solid #2A3B3D; /* Match tooltip background color */
+  /* Position at top of tooltip, slightly right of center to align with circle */
+  top: -12px;
+  left: 65%; /* Move right from center to align with the circle */
+  transform: translateX(-50%); /* Center the triangle on its position */
+}
+
+/* Ensure the triangle has proper z-index */
+.tutorial-tooltip[data-step="6"]::before {
+  z-index: 2001;
+}
+
+/* Maintain the highlight for the selection indicator */
+.selection-indicator.selected {
+  box-shadow: 0 0 15px rgba(188, 139, 55, 0.8) !important;
+  border: 2px solid #BC8B37 !important;
+  z-index: 2500 !important;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 5px rgba(188, 139, 55, 0.8); }
+  50% { box-shadow: 0 0 20px rgba(188, 139, 55, 0.8); }
+  100% { box-shadow: 0 0 5px rgba(188, 139, 55, 0.8); }
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+  .tutorial-tooltip[data-step="6"] {
+    top: 460px !important;
+    left: 180px !important;
+  }
+
+  .tutorial-tooltip[data-step="6"]::before {
+    left: 75%; /* Adjust triangle for mobile */
+  }
+}
+
+/* For even smaller screens */
+@media (max-width: 360px) {
+  .tutorial-tooltip[data-step="6"] {
+    top: 820px !important;
+    left: 150px !important;
+    width: 220px !important;
+  }
+}
+
+/* Add extra highlight to make it clear which area is being referred to */
+#therapy-sequence.highlighted,
+#therapy-activities.highlighted {
+  border: 2px solid #BC8B37;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(188, 139, 55, 0.5);
+  position: relative;
+  z-index: 10;
+}
+
+/* Style for darkened background with the dialog in center */
+.tutorial-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Mobile adjustments to ensure the tooltips appear properly on small screens */
+@media (max-width: 480px) {
+  .tutorial-tooltip[data-step="4"],
+  .tutorial-tooltip[data-step="6"] {
+    width: 90% !important;
+    max-width: 300px !important;
+  }
+}

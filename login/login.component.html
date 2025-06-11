@@ -1,0 +1,80 @@
+<div class="login_form" *ngIf="showLoginPage">
+  <form (ngSubmit)="submitForm()" #form="ngForm">
+    <h1>Your profile</h1>
+    <p>Complete your profile to proceed</p>
+    <select
+      [(ngModel)]="selectedCountry"
+      (change)="onCountryChange()"
+      name="country"
+      [ngClass]="{ placeholder: !selectedCountry }"
+      class="select"
+      required
+    >
+      <option value="" disabled selected hidden>Country*</option>
+      <option *ngFor="let country of countries" [value]="country.code">
+        {{ country.name }}
+      </option>
+    </select>
+
+    <input
+      type="text"
+      [(ngModel)]="user.address"
+      name="address"
+      placeholder="Address"
+    />
+
+    <input
+      type="text"
+      [(ngModel)]="user.city"
+      name="city"
+      placeholder="City*"
+      required
+    />
+
+    <div class="country-code-wrapper">
+      <select
+        [(ngModel)]="selectedCountryCode"
+        name="countryCode"
+        [ngClass]="{ placeholder: !selectedCountryCode }"
+        class="select"
+      >
+        <option value="" disabled selected hidden>Code</option>
+        <option *ngFor="let country of countries" [value]="country.code">
+          {{ country.code }}
+        </option>
+      </select>
+      <input
+        type="text"
+        [(ngModel)]="user.mobile"
+        name="mobile"
+        placeholder="Mobile number"
+      />
+    </div>
+    <input type="text" [(ngModel)]="user.degree" name="degree" placeholder="Highest degree" />
+    <select
+      [(ngModel)]="user.profession"
+      name="profession"
+      [ngClass]="{ placeholder: !user.profession }"
+      (change)="onProfessionChange()"
+      class="select"
+      required
+    >
+      <option value="" disabled selected hidden>Profession*</option>
+      <option *ngFor="let profession of professions" [value]="profession">
+        {{ profession }}
+      </option>
+    </select>
+
+    <input
+      *ngIf="user.profession === 'Other'"
+      type="text"
+      [(ngModel)]="user.otherProfession"
+      name="otherProfession"
+      placeholder="Enter profession*"
+      class="select"
+      required
+    />
+
+    <button type="submit" [disabled]="!form.valid">Continue</button>
+  </form>
+</div>

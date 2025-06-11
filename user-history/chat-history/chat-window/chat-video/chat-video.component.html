@@ -1,0 +1,15 @@
+ <iframe
+    #video
+    appIframeTracker
+    (iframeClick)="openDialog()"
+    class="video"
+    [src]="videoUrl | safeUrl"
+    width="280"
+    height="300"
+    frameborder="0"
+    webkitallowfullscreen
+    mozallowfullscreen
+    allowfullscreen
+  >
+  </iframe>
+

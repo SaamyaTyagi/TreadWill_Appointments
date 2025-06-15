@@ -1,0 +1,111 @@
+/* Header bar (top yellow section) */
+.header-bar {
+  background-color: #f5b849;
+  padding: 12px 16px;
+  color: white;
+  font-weight: bold;
+}
+
+/* Sub bar (brown navigation buttons) */
+.sub-bar {
+  background-color: #a06d12;
+}
+
+.sub-bar .btn {
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 0;
+}
+
+/* Main card section */
+.card-section {
+  border-radius: 20px;
+  background-color: white;
+  border: 1px solid #dee2e6;
+}
+
+/* File box with visual border for selected one */
+.file-box {
+  background-color: #f8f9fa;
+  padding: 10px 15px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  border: 2px solid transparent;
+}
+/* 
+/* Highlight selected/active file */
+/* .file-box:first-of-type {
+  border: 2px solid transparent;
+  background-color: #f8f9fa;
+} */ 
+
+
+
+/* File icon spacing */
+.file-box i {
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+/* Activity pills (schema, assessment) */
+.activity-pill {
+  border-radius: 10px;
+  padding: 10px 15px;
+  color: white;
+  margin-bottom: 10px;
+  font-size: 0.875rem;
+}
+
+/* Schema activity pill */
+.activity-schema {
+  background-color: #a9c9ff;
+  color: #1b3c6e;
+}
+
+/* Assessment activity pill */
+.activity-assessment {
+  background-color: #98d1d1;
+  color: #1c3f3f;
+}
+
+/* Plus (+) button */
+.plus-btn {
+  background-color: black;
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Avatar circle for initials */
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #343a40;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+.editable-title[contenteditable="true"] {
+  outline: 1px solid #ccc;
+  padding: 4px;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+
+
+
+
+

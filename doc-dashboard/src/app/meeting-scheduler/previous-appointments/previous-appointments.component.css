@@ -1,0 +1,51 @@
+.top-bar {
+  background-color: #f6b24d;
+}
+
+.nav-highlight {
+  background-color: #b98126;
+  color: white;
+}
+
+.appointment-box {
+  border-bottom: 1px solid #dee2e6;
+  padding: 1rem 0;
+}
+
+.appt-time {
+  border: 2px solid #2f3e3d;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.5rem;
+  display: inline-block;
+  font-weight: 500;
+}
+
+.btn-schedule {
+  background-color: #2f3e3d;
+  color: white;
+  padding: 0.8rem 1rem;
+  margin: 1rem 0;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .top-bar h5 {
+    font-size: 1rem;
+  }
+
+  .appointment-box {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+
+  .appointment-box .text-end {
+    align-self: flex-end;
+    margin-top: 0.5rem;
+  }
+}
+#appointmentSearch {
+  min-width: 220px;
+  margin-top: 0.3rem;
+}
